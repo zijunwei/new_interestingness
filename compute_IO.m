@@ -1,9 +1,6 @@
 % compute the entropy by computing the IO of one vs rest AUC score
-
-
-
-%
-
+% some file locations are no longer valid
+% date: 2016.10.10
 
 clear;
 clc;
@@ -16,9 +13,7 @@ fprintf('Loading information...\n');
 load(datasetup.VisualInformationPath);
 fprintf('Done\n')
 
-fprintf('Loading entropy...\n');
-load(datasetup.EntropyInformationPath);
-fprintf('Done\n')
+
 %%
 % current set fdm's width to be 15, but the exact value has to be
 % re-computed
@@ -51,8 +46,6 @@ for i=1:1:length(VideoInformation)
             
         end
    
-        
-        
         
         videoFrameSz=size(videoFrame);
 

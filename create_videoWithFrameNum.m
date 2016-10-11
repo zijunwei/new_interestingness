@@ -39,10 +39,7 @@ set(gcf,'visible','off');
 warning off
 % at most 16 users
 % drawColors = z_distinguishable_colors(16);
-
-% i=885, starting of training
-% for i=1:1:5
-for i=20:1:length(selectedVideoNames)
+for i=1:1:length(selectedVideoNames)
     %     entropyIdx=sortedIdx(i);
     
     

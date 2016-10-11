@@ -1,7 +1,4 @@
-
-
-% get number of viewers per videos on Hollywood 2 dataset
-
+% convert video format to playable format on a raw Mac machine
 
 clear;
 clc;

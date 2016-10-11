@@ -1,4 +1,4 @@
-% visalize gaze data in a more complete way
+% visalize gaze data using FDM
 %
 
 
