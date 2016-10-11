@@ -1,17 +1,25 @@
-% change the file name like actioncliptrainXXX to actionXXX;
+% change the file name  actioncliptrainXXX.avi
+%to
+%actiontype_XXX.avi;
+
 clear
 split='train';
 
 datasetup=setup();
 addpath('~/Dev/ZFunc/')
 
-
-
+[trainVid,trainLb,actionClasses]=ml_load(fullfile(datasetup.videoDatasetDir,'info.mat'),'trainVid','TrainLabel','actions');
+% where you need to define the directory
 VideoSavePath=fullfile(datasetup.gazeDatasetDir,'visualization_unresizedEntropy_minmax');
+
+
+
+
+
+
 listofFiles=z_getFileIdsfromDir(VideoSavePath,'.avi');
 listofFiles=cellfun(@(x)cat(2,x,'.avi'),listofFiles,'UniformOutput',false);
 
-[trainVid,trainLb,actionClasses]=ml_load(fullfile(datasetup.videoDatasetDir,'info.mat'),'trainVid','TrainLabel','actions');
 
 for i=1:1:length(listofFiles)
    index=z_structfind(trainVid,'name',listofFiles{i});

@@ -5,20 +5,20 @@
 %
 
 
-% clear;
-% clc;
-% close all
-% 
-% addpath('~/Dev/ZFunc');
-% addpath('~/Dev/ZFunc/Gaze')
-% datasetup=setup();
-% fprintf('Loading information...\n');
-% load(datasetup.VisualInformationPath);
-% fprintf('Done\n')
-% 
-% fprintf('Loading entropy...\n');
-% load(datasetup.EntropyInformationPath);
-% fprintf('Done\n')
+clear;
+clc;
+close all
+
+addpath('~/Dev/ZFunc');
+addpath('~/Dev/ZFunc/Gaze')
+datasetup=setup();
+fprintf('Loading information...\n');
+load(datasetup.VisualInformationPath);
+fprintf('Done\n')
+
+fprintf('Loading entropy...\n');
+load(datasetup.EntropyInformationPath);
+fprintf('Done\n')
 %%
 % current set fdm's width to be 15, but the exact value has to be
 % re-computed
