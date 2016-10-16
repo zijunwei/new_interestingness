@@ -30,7 +30,7 @@ draw=false;
 if draw
     figure;
 end
-for percentile=0.01:0.01:0.25
+% for percentile=0.01:0.01:0.25
     for i=1:1:length(selectedVideoNames)
         assert(strcmp(selectedVideoNames{i},VideoInformation(i).videoname) && strcmp(VideoInformation(i).videoname, VideoEntropy(i).videoname))
         

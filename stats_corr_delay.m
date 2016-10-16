@@ -2,7 +2,6 @@
 % pick the regions with engagment > 0.8, draw quantile on io-agreement
 % also pick the regions with engagment <0.8, draw the quantile on
 % io-agreement
-% 
 
 
 close all
@@ -20,9 +19,9 @@ load engagement_35.mat
 cut_range=10; %cut 10 frames
 n_eng_subjects=13;
 interestingness=interestingness/n_eng_subjects;
-smooth_span=24;
+smooth_span=5;
 interestingness_thres=0;
-
+delay_frame=0;
 
 draw=false;
 vis=false;
@@ -57,19 +56,29 @@ for i=1:1:length(selectedVideoNames)
         plot(1:len,max_eng,'LineWidth',2,'Color','r');
         plot(1:len,min_eng,'LineWidth',2,'Color','b')
     end
-%     % when processing, cut the range:
+    %     % when processing, cut the range:
     io_score=smooth(  io_score(cut_range:end-cut_range),smooth_span);
     max_eng=smooth( max_eng(cut_range:end-cut_range),smooth_span);
     min_eng=smooth( min_eng(cut_range:end-cut_range),smooth_span);
-%     
-%     
-%     io_score=(  io_score(cut_range:end-cut_range));
-%     max_eng=( max_eng(cut_range:end-cut_range));
-%     min_eng=( min_eng(cut_range:end-cut_range));
-
     diff_eng=max_eng-min_eng;
+    
+    %     diff_eng=diff_eng(delay_frame+1:end);
+    
+    min_eng=min_eng(delay_frame+1:end);
+    
+    diff_eng=min_eng;
+    io_score=io_score(1:end-delay_frame);
+    
+    
+    
+    %
+    %
+    %     io_score=(  io_score(cut_range:end-cut_range));
+    %     max_eng=( max_eng(cut_range:end-cut_range));
+    %     min_eng=( min_eng(cut_range:end-cut_range));
+    
     keep_idx= cut_range:len-cut_range;
-
+    
     
     [~,top_idx] = sort(io_score,'descend');
     
@@ -78,9 +87,9 @@ for i=1:1:length(selectedVideoNames)
     io_score=io_score(keep_percentile);
     diff_eng=diff_eng(keep_percentile);
     
-     io_scores{i}=io_score;
-     diff_engs{i}=diff_eng;
-
+    io_scores{i}=io_score;
+    diff_engs{i}=diff_eng;
+    
     
 end
 io_scores_vec=cat(1, io_scores{:});

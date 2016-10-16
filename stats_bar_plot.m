@@ -1,8 +1,5 @@
-
-% pick the regions with engagment > 0.8, draw quantile on io-agreement
-% also pick the regions with engagment <0.8, draw the quantile on
-% io-agreement
-% 
+% statistical test 4
+% draw the relationship between partios and io-scores vs. max-min scores
 
 
 close all
@@ -20,7 +17,7 @@ load engagement_35.mat
 cut_range=10; %cut 10 frames
 n_eng_subjects=13;
 interestingness=interestingness/n_eng_subjects;
-smooth_span=24;
+smooth_span=5;
 interestingness_thres=0;
 
 
