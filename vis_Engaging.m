@@ -77,7 +77,7 @@ end
 % % % end
 
 
-VideoSavePath='vids_selected_vid_view';
+VideoSavePath='/home/zijwei/Dropbox/interestingness/visualization_IO_rankings/show/vids_selected_view';
 if ~exist(VideoSavePath,'dir')
     mkdir(VideoSavePath)
 end
@@ -87,7 +87,7 @@ for i=1:1:length(selectedVideoNames)
     set(gcf,'visible','off')
     warning off
     assert(strcmp( selectedVideoNames{i},VideoEntropy(i).videoname))
-    if length(VideoEntropy(i).entropy)>250
+    if length(VideoEntropy(i).entropy)<=250
         continue;
     end
     fprintf('---processing %s \t [ %04d | %04d], total %d frames\n',VideoEntropy(i).videoname,i,length(VideoEntropy),length(VideoEntropy(i).entropy));
@@ -106,36 +106,36 @@ for i=1:1:length(selectedVideoNames)
         imshow(videoFrame);
         idx=z_structfind(VideoInformation,'videoname',VideoEntropy(i).videoname);
         hold on;
-%         gazePosition=zeros(length(length(VideoInformation(idx).gaze)),2);
-%         ValidViewers=0;
-%         for j=1:1:length(VideoInformation(idx).gaze)
-%             gaze=( VideoInformation(idx).gaze(j).data);
-%             % for now, only use the fixation data
-%             gaze=gaze(gaze(:,end)==1,:);
-%             % convert mmseconds to framerate
-%             gaze(:,1)=ceil( gaze(:,1)/1000/1000*VideoInformation(idx).framerate);
-%             
-%             selectedGaze=gaze(gaze(:,1)==FrameCount,:);
-%             if ~isempty(selectedGaze)
-%                 ValidViewers=ValidViewers+1;
-%             end
-%             selectedGaze=selectedGaze(:,3:4);
-%             gazePosition(j,:)=mean(selectedGaze,1);
-%             
-%         end
+        gazePosition=zeros(length(length(VideoInformation(idx).gaze)),2);
+        ValidViewers=0;
+        for j=1:1:length(VideoInformation(idx).gaze)
+            gaze=( VideoInformation(idx).gaze(j).data);
+            % for now, only use the fixation data
+            gaze=gaze(gaze(:,end)==1,:);
+            % convert mmseconds to framerate
+            gaze(:,1)=ceil( gaze(:,1)/1000/1000*VideoInformation(idx).framerate);
+            
+            selectedGaze=gaze(gaze(:,1)==FrameCount,:);
+            if ~isempty(selectedGaze)
+                ValidViewers=ValidViewers+1;
+            end
+            selectedGaze=selectedGaze(:,3:4);
+            gazePosition(j,:)=mean(selectedGaze,1);
+            
+        end
         
         title(sprintf(' interesting score: %.2f', interestingness(i)/length(listofSubjectFiles)));
         
         
-%         videoFrameSz=size(videoFrame);
-%         gazePosition=z_cropCoordinates(gazePosition,[videoFrameSz(2),videoFrameSz(1)]);
-%         
-%         drawColors = z_distinguishable_colors(size(gazePosition,1));
-%         
-%         
-%         for j = 1:size(gazePosition,1)
-%             text (gazePosition(j, 1), gazePosition(j, 2), ['{\color{black}\bf', num2str(j), '}'], 'FontSize', 10, 'BackgroundColor', drawColors(j,:));
-%         end
+        videoFrameSz=size(videoFrame);
+        gazePosition=z_cropCoordinates(gazePosition,[videoFrameSz(2),videoFrameSz(1)]);
+        
+        drawColors = z_distinguishable_colors(size(gazePosition,1));
+        
+        
+        for j = 1:size(gazePosition,1)
+            text (gazePosition(j, 1), gazePosition(j, 2), ['{\color{black}\bf', num2str(j), '}'], 'FontSize', 10, 'BackgroundColor', drawColors(j,:));
+        end
         
         
         hold off
